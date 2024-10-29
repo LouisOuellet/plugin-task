@@ -5,7 +5,7 @@
  */
 
 class helper_plugin_task extends DokuWiki_Plugin {
-  
+
     function getMethods() {
         $result = array();
         $result[] = array(
@@ -50,7 +50,7 @@ class helper_plugin_task extends DokuWiki_Plugin {
                 );
         return $result;
     }
-  
+
     /**
      * Returns the column header for the Pagelist Plugin
      */
@@ -124,12 +124,12 @@ class helper_plugin_task extends DokuWiki_Plugin {
             // skip assigned and not new tasks if filter is 'new'
             if (($filter == 'new') && ($task['user']['name'] || ($task['status'] != 0))) continue;
 
-            // filter is 'due' or 'overdue' 
+            // filter is 'due' or 'overdue'
             if (in_array($filter, array('due', 'overdue'))) {
                 if (!$date || ($date > time()) || ($task['status'] > 2)) continue;
                 elseif (($date + 86400 < time()) && ($filter == 'due')) continue;
                 elseif (($date + 86400 > time()) && ($filter == 'overdue')) continue;
-            } 
+            }
 
             $result[$task['key']] = array(
                     'id'       => $id,
@@ -398,10 +398,10 @@ class helper_plugin_task extends DokuWiki_Plugin {
         switch ($status) {
             case -1:
                 return 'CANCELLED';
-            case 1: 
+            case 1:
             case 2:
                 return 'IN-PROCESS';
-            case 3: 
+            case 3:
             case 4:
                 return 'COMPLETED';
             default:
@@ -429,7 +429,7 @@ class helper_plugin_task extends DokuWiki_Plugin {
     /**
      * Show the form to create a new task.
      * The function just forwards the call to the old or new function.
-     * 
+     *
      * @param string $ns              The DokuWiki namespace in which the new task
      *                                page shall be created
      * @param bool   $selectUser      If false then create a simple input line for the user field.
@@ -449,7 +449,7 @@ class helper_plugin_task extends DokuWiki_Plugin {
     /**
      * Show the form to create a new task.
      * This is the new version using class dokuwiki\Form\Form.
-     * 
+     *
      * @see _newTaskForm
      */
     protected function _newTaskFormNew($ns, $selectUser=false, $selectUserGroup=NULL) {
@@ -533,7 +533,7 @@ class helper_plugin_task extends DokuWiki_Plugin {
     /**
      * Show the form to create a new task.
      * This is the old version, creating all HTML code on its own.
-     * 
+     *
      * @see _newTaskForm
      */
     protected function _newTaskFormOld($ns, $selectUser=false, $selectUserGroup=NULL) {
