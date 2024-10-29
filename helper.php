@@ -350,8 +350,10 @@ class helper_plugin_task extends DokuWiki_Plugin {
             'UID:'.$id.'@'.$_SERVER['SERVER_NAME'].CRLF.
             'URL:'.wl($id, '', true, '&').CRLF.
             'SUMMARY:'.$this->_vsc($meta['title']).CRLF;
-        if ($meta['description']['abstract'])
+        if (isset($meta['description']['abstract']) && $meta['description']['abstract'])
             $ret .= 'DESCRIPTION:'.$this->_vsc($meta['description']['abstract']).CRLF;
+        elseif (isset($meta['description']) && $meta['description'])
+            $ret .= 'DESCRIPTION:'.$this->_vsc($meta['description']).CRLF;
         if ($meta['subject'])
             $ret .= 'CATEGORIES:'.$this->_vcategories($meta['subject']).CRLF;
         if ($task['date']['created'])
