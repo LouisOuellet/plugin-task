@@ -30,7 +30,7 @@ $output = 'BEGIN:VCALENDAR'.CRLF.
   $data['vtodo'].
   'END:VCALENDAR'.CRLF;
 
-header("Content-Disposition: attachment; filename='$filename'");
+header("Content-Disposition: attachment; filename=$filename");
 header('Content-Length: '.strlen($output));
 header('Connection: close');
 header("Content-Type: text/Calendar; name='$filename'");
