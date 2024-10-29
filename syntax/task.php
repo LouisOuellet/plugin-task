@@ -149,7 +149,7 @@ class syntax_plugin_task_task extends DokuWiki_Syntax_Plugin {
         $this->my =& plugin_load('helper', 'task');
         if (!is_object($this->my)) return false;
         $this->task = $this->my->readTask($ID);
-        return $true;
+        return true;
     }
 
     /**
