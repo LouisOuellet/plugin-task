@@ -131,6 +131,9 @@ class helper_plugin_task extends DokuWiki_Plugin {
                 elseif (($date + 86400 > time()) && ($filter == 'overdue')) continue;
             }
 
+            // Filter task if user is specified
+            if($user && $user != $task['user']['id']) continue;
+
             $result[$task['key']] = array(
                     'id'       => $id,
                     'date'     => $date,
