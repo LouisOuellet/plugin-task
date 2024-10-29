@@ -137,7 +137,7 @@ class helper_plugin_task extends DokuWiki_Plugin {
                     'user'     => $task['user']['name'],
                     'status'   => $this->statusLabel($task['status']),
                     'priority' => $task['priority'],
-                    'perm'     => $perm,
+                    // 'perm'     => $perm,
                     'file'     => $task['file'],
                     'exists'   => true,
                     );
