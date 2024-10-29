@@ -30,7 +30,7 @@ class syntax_plugin_task_tasks extends DokuWiki_Syntax_Plugin {
         $match = substr($match, 8, -2); // strip {{topic> from start and }} from end
         list($match, $flags) = explode('&', $match, 2);
         $flags = explode('&', $flags);
-        list($match, $refine) = explode(' ', $match, 2);
+        list($match, $refine) = array_pad(explode(' ', $match, 2), 2, null);
         list($ns, $filter) = explode('?', $match, 2);
 
         if (($ns == '*') || ($ns == ':')) $ns = '';
@@ -47,12 +47,12 @@ class syntax_plugin_task_tasks extends DokuWiki_Syntax_Plugin {
 
         if (!$filter || ($filter == 'select')) {
             $select = true;
-            $filter = trim($_REQUEST['filter']);
+            $filter = trim($_REQUEST['filter'] ?? null);
         }
         $filter = strtolower($filter);
         $filters = $this->_viewFilters();
         if (!in_array($filter, $filters)) $filter = 'open';
-        if(isset($_REQUEST['view_user'])) $user = $_REQUEST['view_user'];
+        $user = $_REQUEST['view_user'] ?? null;
 
         if ($this->helper) $pages = $this->helper->getTasks($ns, NULL, $filter, $user);
 
@@ -129,7 +129,7 @@ class syntax_plugin_task_tasks extends DokuWiki_Syntax_Plugin {
                 $pagelist->addPage($page);
             }
             $renderer->doc .= $pagelist->finishList();
-            $renderer->doc .= $this->_paginationLinks($numOfPages, $currentPage, $filter);      
+            $renderer->doc .= $this->_paginationLinks($numOfPages ?? 0, $currentPage ?? 0, $filter);
 
             // show form to create a new task?
             if($perm_create && ($this->getConf('tasks_formposition') == 'bottom')) {
@@ -205,7 +205,7 @@ class syntax_plugin_task_tasks extends DokuWiki_Syntax_Plugin {
             $form->addHTML('<label class="simple"><span>'.$this->getLang('view_user').':</span>', $pos++);
             $input = $form->addCheckbox('view_user', NULL, $pos++);
             $input->attr('value', $_SERVER['REMOTE_USER']);
-            if ($_REQUEST['view_user']) {
+            if (isset($_REQUEST['view_user']) && $_REQUEST['view_user']) {
                 $input->attr('checked', 'checked');
             }
             $form->addHTML('</label>', $pos++);

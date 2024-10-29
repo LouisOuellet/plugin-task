@@ -29,8 +29,8 @@ class syntax_plugin_task_task extends DokuWiki_Syntax_Plugin {
         $match = substr($match, 6, -2);
         $priority = strspn(strstr($match, '!'), '!');
         $match = trim($match, ':!');
-        list($user, $date) = explode('?', $match);
-    
+        list($user, $date) = array_pad(explode('?', $match), 2, null);
+
         if ($my =& plugin_load('helper', 'task')) {
             $date = $my->_interpretDate($date);
 
