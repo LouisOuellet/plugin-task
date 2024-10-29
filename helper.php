@@ -132,7 +132,7 @@ class helper_plugin_task extends DokuWiki_Plugin {
             }
 
             // Filter task if user is specified
-            if($user && $user != $task['user']['id']) continue;
+            if($user && (!isset($task['user']['id']) || $user !== $task['user']['id'])) continue;
 
             $result[$task['key']] = array(
                     'id'       => $id,
